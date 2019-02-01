@@ -1,11 +1,3 @@
-# -*- coding: utf-8 -*-
-
-"""
-Created on 2019-02-01
-:author:  ()
-"""
-
-from kotti.resources import File
 from pyramid.i18n import TranslationStringFactory
 
 _ = TranslationStringFactory('kotti_forum')
@@ -25,9 +17,10 @@ def kotti_configure(settings):
 
     settings['pyramid.includes'] += ' kotti_forum'
     settings['kotti.alembic_dirs'] += ' kotti_forum:alembic'
-    settings['kotti.available_types'] += ' kotti_forum.resources.CustomContent'
+    settings['kotti.available_types'] += (
+          ' kotti_forum.resources.Forum' +
+          ' kotti_forum.resources.Idea')
     settings['kotti.fanstatic.view_needed'] += ' kotti_forum.fanstatic.css_and_js'
-    File.type_info.addable_to.append('CustomContent')
 
 
 def includeme(config):
