@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-
-"""
-Created on 2019-02-01
-:author:  ()
-"""
-
 import colander
 from kotti.views.edit import ContentSchema
 from kotti.views.form import AddFormView
@@ -12,31 +5,52 @@ from kotti.views.form import EditFormView
 from pyramid.view import view_config
 
 from kotti_forum import _
-from kotti_forum.resources import CustomContent
+
+from kotti_forum.resources import Forum
+from kotti_forum.resources import Idea
 
 
-class CustomContentSchema(ContentSchema):
-    """ Schema for CustomContent. """
+class ForumSchema(ContentSchema):
+    """Schema for Forum"""
 
-    custom_attribute = colander.SchemaNode(
+    title = colander.SchemaNode(
         colander.String(),
-        title=_(u"Custom attribute"))
+        title=_(u'Forum Name'),
+    )
 
 
-@view_config(name=CustomContent.type_info.add_view,
-             permission=CustomContent.type_info.add_permission,
+class IdeaSchema(ContentSchema):
+    """Schema for Idea"""
+
+    title = colander.SchemaNode(
+        colander.String(),
+        title=_(u'Idea'),
+    )
+
+
+@view_config(name='edit', context=Forum, permission='edit',
              renderer='kotti:templates/edit/node.pt')
-class CustomContentAddForm(AddFormView):
-    """ Form to add a new instance of CustomContent. """
-
-    schema_factory = CustomContentSchema
-    add = CustomContent
-    item_type = _(u"CustomContent")
+class ForumEditForm(EditFormView):
+    schema_factory = ForumSchema
 
 
-@view_config(name='edit', context=CustomContent, permission='edit',
+@view_config(name=Forum.type_info.add_view, permission='add',
              renderer='kotti:templates/edit/node.pt')
-class CustomContentEditForm(EditFormView):
-    """ Form to edit existing CustomContent objects. """
+class ForumAddForm(AddFormView):
+    schema_factory = ForumSchema
+    add = Forum
+    item_type = u"Forum"
 
-    schema_factory = CustomContentSchema
+
+@view_config(name='edit', context=Idea, permission='edit',
+             renderer='kotti:templates/edit/node.pt')
+class IdeaEditForm(EditFormView):
+    schema_factory = IdeaSchema
+
+
+@view_config(name=Idea.type_info.add_view, permission='add',
+             renderer='kotti:templates/edit/node.pt')
+class IdeaAddForm(AddFormView):
+    schema_factory = IdeaSchema
+    add = Idea
+    item_type = u"Idea"
