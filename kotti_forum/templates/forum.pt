@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="api.macro('kotti:templates/view/master.pt')">
+
+  <article metal:fill-slot="content" class="forum-view content">
+    <h1>${context.title}</h1>
+    <ul>
+        <li tal:repeat="idea ideas">
+  <a href="${request.resource_url(idea)}">
+    ${idea.title}
+  </a>        </li>
+
+    </ul>
+  </article>
+
+</html>
+
