@@ -1,13 +1,25 @@
+from kotti.resources import get_root
 from kotti.resources import Content
+from kotti.resources import TypeInfo
 from sqlalchemy import Column
 from sqlalchemy import ForeignKey
 from sqlalchemy import Integer
 
 
+class ForumTypeInfo(TypeInfo):
+
+    def addable(self, context, request):
+        """add once, and only at the root"""
+        at_root = context == get_root()
+        already_added = self in [
+                c.type_info for c in context.children]
+        return at_root and not already_added
+
+
 class Forum(Content):
     id = Column(Integer(), ForeignKey('contents.id'), primary_key=True)
 
-    type_info = Content.type_info.copy(
+    type_info = ForumTypeInfo(
         name=u'Forum',
         title=u'Forum',
         add_view=u'add_forum',
