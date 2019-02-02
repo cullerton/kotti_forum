@@ -4,13 +4,12 @@ Kotti Forum
 
 Kotti Forum is a simple blogging extension for Kotti.
 
-It has two content types; Forum and Idea. A Forum is a container for Ideas.
+It was originally written as an academic exercise.
 
-Kotti Forum installs a Forum at the root of your site titled *Ideas*.
+Kotti Forum has two content types; Forum and Idea.
 
-Kotti Forum was originally written as an academic exercise.
+A Forum is a container for Ideas. Ideas are meant to be blog entries.
 
-Code is located at https://github.com//cullerton/kotti_forum
 
 Setup
 =====
