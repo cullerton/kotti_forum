@@ -1,5 +1,7 @@
 import colander
+# from deform.widget import RichTextWidget
 from kotti.views.edit import ContentSchema
+from kotti.views.edit import DocumentSchema
 from kotti.views.form import AddFormView
 from kotti.views.form import EditFormView
 from pyramid.view import view_config
@@ -19,13 +21,24 @@ class ForumSchema(ContentSchema):
     )
 
 
-class IdeaSchema(ContentSchema):
+class IdeaSchema(DocumentSchema):
     """Schema for Idea"""
+    pass
 
-    title = colander.SchemaNode(
-        colander.String(),
-        title=_(u'Idea'),
-    )
+    # title = colander.SchemaNode(
+    #     colander.String(),
+    #     title=_(u'Idea'),
+    # )
+
+    # body = colander.SchemaNode(
+    #     colander.String(),
+    #     title=_(u'Idea'),
+    #     widget=RichTextWidget(
+    #         # theme='advanced', width=790, height=500
+    #         height=500
+    #     ),
+    #     missing="",
+    # )
 
 
 @view_config(name='edit', context=Forum, permission='edit',

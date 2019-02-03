@@ -1,5 +1,6 @@
 from kotti.resources import get_root
 from kotti.resources import Content
+from kotti.resources import Document
 from kotti.resources import TypeInfo
 from sqlalchemy import Column
 from sqlalchemy import ForeignKey
@@ -27,10 +28,10 @@ class Forum(Content):
     )
 
 
-class Idea(Content):
-    id = Column(Integer(), ForeignKey('contents.id'), primary_key=True)
+class Idea(Document):
+    id = Column(Integer(), ForeignKey('documents.id'), primary_key=True)
 
-    type_info = Content.type_info.copy(
+    type_info = Document.type_info.copy(
         name=u'Idea',
         title=u'Idea',
         add_view=u'add_choice',
